@@ -33,7 +33,7 @@
 
     async function getList() {
         showLoader();
-        let res = await axios.get('/get-event');
+        let res = await axios.get('/catagory-list');
         hideLoader();
         
         let tableData = $('#tableData');
@@ -44,7 +44,7 @@
 
         res.data.forEach(function (item,index){
 
-            let truncatedDescription = item.description.length > 20 ? item.description.substring(0, 30) + '...' : item.description;
+           
             
             let row = `<tr>
                 <td>${index+1} </td>

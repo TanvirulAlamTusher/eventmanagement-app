@@ -22,7 +22,7 @@
       document.getElementById("delete-modal-close").click();
        
       showLoader();
-      let res = await axios.post('/delete-event', {id:id});
+      let res = await axios.post('/catagory-delete', {id:id});
       hideLoader();
 
       if(res.data === 1){

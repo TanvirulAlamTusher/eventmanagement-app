@@ -76,8 +76,11 @@ public function CreateEvent(Request $request){
             'date' => $request->input('date'),
             'time' => $request->input('time'),
             'location' => $request->input('location'),
+            'category_id'=>$request->input('category_id'),
             'user_id' => $user_id
-        ]);
+           
+            
+        ]);  
     
         return response()->json([
             'status' => 'success',
@@ -86,7 +89,8 @@ public function CreateEvent(Request $request){
     } catch (Exception $e) {
         return response()->json([
             'status' => 'failure',
-            'message' => 'Something went wrong'
+            'message' => 'Something went wrong',
+       
         ], 200);
     }
 }

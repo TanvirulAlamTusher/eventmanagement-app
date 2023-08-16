@@ -2,55 +2,20 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Event</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update Category</h5>
             </div>
             <div class="modal-body">
                 <form id="update-form">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <label class="form-label">Title</label>
-                                <input type="text" class="form-control" id="updatetitle">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-control" id="updateName">
                             </div>
                         </div>
                         
-                        <div class="row">
-                            <div class="col-12 p-1">
-                                <label class="form-label">Description</label>
-                                <textarea class="form-control" id="updatedescription" name="updatedescription"></textarea>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-6 p-1">
-                                <label class="form-label">Date</label>
-                                <input type="date" class="form-control" id="updatedate" name="date">
-                            </div>
-                            <div class="col-6 p-1">
-                                <label class="form-label">Time</label>
-                                <input type="time" class="form-control" id="updatetime" name="time">
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-12 p-1">
-                                <label class="form-label">Location</label>
-                                <input type="text" class="form-control" id="updatelocation" name="location">
-                            </div>
-                        </div>
-
-
-                        <div class="row d-none">
-                            <div class="col-12 p-1">
-                                <label class="form-label">Category</label>
-                                <select class="form-control" id="categoryDropdown">
-                                    <option value="">--Select Category--</option>
-                                  
-                                  
-                                </select>
-                            </div>
-                        </div>
-                        <input  id="updateID"/>
+                        <input class="d-none"  id="updateID"/>
                     </div>
                 </form>
             </div>
@@ -79,16 +44,13 @@
         document.getElementById('updateID').value = id;
 
         showLoader();
-      //  await UpdateFillCategoryDropDown();
-        let res = await axios.post("/get-event-by-id",{id:id})
+
+        let res = await axios.post("/category-by-id",{id:id})
         hideLoader();
        
 
-         document.getElementById('updatetitle').value= res.data['title'];
-         document.getElementById('updatedescription').value= res.data['description'];
-          document.getElementById('updatedate').value = res.data['date'];
-          document.getElementById('updatetime').value = res.data['time'];
-          document.getElementById('updatelocation').value = res.data['location'];
+         document.getElementById('updateName').value= res.data['name'];
+       
     
        
      }
@@ -96,55 +58,30 @@
      async function Update(){
         let id =  document.getElementById('updateID').value
 
-        let title = document.getElementById('updatetitle').value
-        let description = document.getElementById('updatedescription').value
-        let date = document.getElementById('updatedate').value
-        let time = document.getElementById('updatetime').value
-        let location = document.getElementById('updatelocation').value
+        let name =  document.getElementById('updateName').value
+       
        
 
-        if(title.length === 0) 
+        if(name.length === 0) 
        {
-        errorToast("Title Required");
-       }
-       else if(description.length === 0) 
-       {
-        errorToast("Description Required");
-       }
-      
-       else if(date.length === 0) 
-       {
-        errorToast("Date Required");
-       }
-       else if(time.length === 0) 
-       {
-        errorToast("Time Required");
-       }
-       else if(location.length === 0) 
-       {
-        errorToast("Location Required");
-       }
-        
+        errorToast("Name Required");
+       }  
        else{
         document.getElementById('update-modal-close').click();
 
         showLoader();
-         let res = await axios.post('/update-event',{
-            title:title,
-            description:description,
-            date:date,
-            time:time,
-            location:location,
+         let res = await axios.post('/catagory-update',{
+            name:name,
             id:id
 
              });
         hideLoader();
 
-         if(res.status===200 && res.data['status']==='success'){
+         if(res.data===1){
             await  getList();
-             successToast(res.data['message']);
+             successToast('Update Successfully');
          }else{
-             errorToast(res.data['message']);
+             errorToast('Something went wrong');
 
          }
        }  

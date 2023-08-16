@@ -41,10 +41,10 @@
                         </div>
 
 
-                        <div class="row d-none">
+                        <div class="row ">
                             <div class="col-12 p-1">
                                 <label class="form-label">Category</label>
-                                <select class="form-control" id="categoryDropdown">
+                                <select class="form-control" id="EventcategoryDropdown">
                                     <option value="">--Select Category--</option>
                                   
                                   
@@ -66,16 +66,16 @@
 
 <script>
 
-// FillCategoryDropDown();
+ FillCategoryDropDown();
 
-// async function FillCategoryDropDown(){
-//     let res = await axios.get("/catagory-list")
-//     res.data.forEach(function (item,i) {
-//         let option=`<option value="${item['id']}">${item['name']}</option>`
-//         $("#categoryDropdown").append(option);
-//     })
+ async function FillCategoryDropDown(){
+     let res = await axios.get("/catagory-list")
+     res.data.forEach(function (item,i) {
+         let option=`<option value="${item['id']}">${item['name']}</option>`
+         $("#EventcategoryDropdown").append(option);
+     })
 
-// }
+ }
 
 async function Save() {
        let title = document.getElementById('title').value;
@@ -83,6 +83,7 @@ async function Save() {
        let date = document.getElementById('date').value;
        let time = document.getElementById('time').value;
        let location = document.getElementById('location').value;
+       let category_id = document.getElementById('EventcategoryDropdown').value;
        
        if(title.length === 0) 
        {
@@ -105,6 +106,10 @@ async function Save() {
        {
         errorToast("Location Required");
        }
+       else if(category_id.length === 0) 
+       {
+        errorToast("Category Required");
+       }
         
        else{
         document.getElementById('modal-close').click();
@@ -115,14 +120,14 @@ async function Save() {
             description:description,
             date:date,
             time:time,
-            location:location
+            location:location,
+            category_id:category_id
              });
         hideLoader();
 
          if(res.status===200 && res.data['status']==='success'){
             await  getList();
              successToast(res.data['message']);
-             successToast(res.data['errors']);
          }else{
              errorToast(res.data['message']);
 

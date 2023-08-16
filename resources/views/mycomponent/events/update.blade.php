@@ -40,10 +40,10 @@
                         </div>
 
 
-                        <div class="row d-none">
+                        <div class="row ">
                             <div class="col-12 p-1">
                                 <label class="form-label">Category</label>
-                                <select class="form-control" id="categoryDropdown">
+                                <select type="text"  class="form-control form-select" id="updatecategoryDropdown">
                                     <option value="">--Select Category--</option>
                                   
                                   
@@ -64,14 +64,17 @@
 
 <script>
 
-    //   async function UpdateFillCategoryDropDown(){
-    //     let res = await axios.get("/catagory-list")
-    //     res.data.forEach(function (item) {
-    //       //  let option=`<option value="${item['id']}">${item['name']}</option>`
-    //         let option=`<option value="">"hello"</option>`
-    //         $("#updatecategoryDropdown").append(option);
-    //     })
-    // } 
+      async function UpdateFillCategoryDropDown(){
+        let dropdown = $("#updatecategoryDropdown");
+        dropdown.empty(); 
+        
+        let res = await axios.get("/catagory-list")
+        res.data.forEach(function (item,i) {
+
+           let option=`<option value="${item['id']}">${item['name']}</option>`
+           $("#updatecategoryDropdown").append(option);
+        })
+    } 
 
     
 
@@ -79,7 +82,7 @@
         document.getElementById('updateID').value = id;
 
         showLoader();
-      //  await UpdateFillCategoryDropDown();
+        await UpdateFillCategoryDropDown();
         let res = await axios.post("/get-event-by-id",{id:id})
         hideLoader();
        

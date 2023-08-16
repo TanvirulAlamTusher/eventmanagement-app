@@ -5,6 +5,7 @@ use App\Http\Controllers\EventCategotyController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\EventCategoty;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,14 @@ Route::middleware('auth')->group(function () {
    Route::post('/get-event-by-id',[EventController::class,'EventById']);
    Route::post('/update-event',[EventController::class,'UpdateEvent'])->name('event.update');
    Route::post('/delete-event',[EventController::class,'DeleteEvent'])->name('event.delete');
+   //event category
+   Route::post('/create-catagory', [EventCategotyController::class, 'CreateCategory']);
+   Route::get('/catagory-list', [EventCategotyController::class, 'CategoryList']);
+   Route::post('/catagory-delete', [EventCategotyController::class, 'DeleteCategory']);
+   Route::post('/catagory-update', [EventCategotyController::class, 'UpdateCategory']);
+    Route::post('/category-by-id', [EventCategotyController::class, 'CategotyById']);
+
+ 
 });
 Route::middleware('auth')->group(function () {
     //event page route

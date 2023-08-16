@@ -11,17 +11,11 @@
                         <div class="row">
                             <div class="col-12 p-1">
                                 <label class="form-label">Name</label>
-                                <input type="text" class="form-control" id="title" >
+                                <input type="text" class="form-control" id="categoryName" >
                             </div>
                         </div>
-                        
-                       
-                        
-                       
-
-
-                     
                     </div>
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -47,53 +41,32 @@
 // }
 
 async function Save() {
-       let title = document.getElementById('title').value;
-       let description = document.getElementById('description').value;
-       let date = document.getElementById('date').value;
-       let time = document.getElementById('time').value;
-       let location = document.getElementById('location').value;
-       
-       if(title.length === 0) 
-       {
-        errorToast("Title Required");
-       }
-       else if(description.length === 0) 
-       {
-        errorToast("Description Required");
-       }
+       let name = document.getElementById('categoryName').value;
       
-       else if(date.length === 0) 
+       
+       if(name.length === 0) 
        {
-        errorToast("Date Required");
+        errorToast("Name Required");
        }
-       else if(time.length === 0) 
-       {
-        errorToast("Time Required");
-       }
-       else if(location.length === 0) 
-       {
-        errorToast("Location Required");
-       }
-        
-       else{
-        document.getElementById('modal-close').click();
+        else{
 
-        showLoader();
-         let res = await axios.post('/create-event',{
-            title:title,
-            description:description,
-            date:date,
-            time:time,
-            location:location
+        document.getElementById('modal-close').click();
+       
+
+         showLoader();
+         let res = await axios.post('/create-catagory',{
+            name:name
+           
              });
         hideLoader();
 
-         if(res.status===200 && res.data['status']==='success'){
+         if(res.data===1){
             await  getList();
-             successToast(res.data['message']);
-             successToast(res.data['errors']);
+             successToast("catagory saved successfully");
+             document.getElementById('save-form').reset();
+             
          }else{
-             errorToast(res.data['message']);
+             errorToast("something went wrong");
 
          }
        }  
