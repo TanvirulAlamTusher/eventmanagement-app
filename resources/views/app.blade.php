@@ -54,6 +54,17 @@
                     <a href="{{url("/profileDetails")}}" class="side-bar-item">
                         <span class="side-bar-item-caption">Profile</span>
                     </a>
+
+                    <a href="{{url("/register")}}" class="side-bar-item">
+                        <span class="side-bar-item-caption">Register</span>
+                    </a>
+
+                    <a href="{{url("/login")}}" class="side-bar-item">
+                        <span class="side-bar-item-caption">Login</span>
+                    </a>
+
+
+
                     <a href="{{Route('logout')}}" class="side-bar-item">
                         <span class="side-bar-item-caption">Logout</span>
                     </a>

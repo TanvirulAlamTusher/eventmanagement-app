@@ -25,7 +25,8 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
    // return view('dashboard');
-    return view('pages.dashboard-page');
+   // return view('pages.dashboard-page');
+   return view('pages.public-event-page');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
