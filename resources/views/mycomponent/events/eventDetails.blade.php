@@ -12,6 +12,7 @@
                 </div>
                 <div class="event_footer">
                     <p id="eventLocation" class="location"></p>
+                    <p id="attendanceid" class="location"></p>
                 </div>
                 <input class="d-none" id="eventId" type="text">
             </div>
@@ -28,9 +29,10 @@
 
         document.getElementById('eventTitle').innerHTML= res.data['title'];
          document.getElementById('eventDesc').innerHTML= res.data['description'];
-          document.getElementById('eventDate').innerHTML = res.data['date'];
-          document.getElementById('eventTime').innerHTML = res.data['time'];
-          document.getElementById('eventLocation').innerHTML = res.data['location'];
+          document.getElementById('eventDate').innerHTML ="Date : " + res.data['date'];
+          document.getElementById('eventTime').innerHTML ="Time : " + res.data['time'];
+          document.getElementById('eventLocation').innerHTML ="Location : " + res.data['location'];
+          document.getElementById('attendanceid').innerHTML ="Total interested : " + res.data['attendance'];
 
         
          

@@ -201,4 +201,27 @@ public function UpdateEvent(Request $request){
     ->where('id',$event_id)->first();
     
    }
+
+   public function incrementAttendance(Request $request)
+   {  $eventId = $request->input('id'); 
+    //   try{
+    //     $eventId = $request->input('id'); 
+       
+    //    return Event::where('id',$eventId)->increment('attendance');
+
+    //   }catch(Exception $e){
+
+    //   }
+    
+
+
+       $event = Event::find($eventId);
+
+       if ($event) {
+           $event->increment('attendance');
+           return response()->json(['message' => 'Attendance incremented successfully']);
+       } else {
+           return response()->json(['error' => 'Event not found'], 404);
+       }
+   }
 }

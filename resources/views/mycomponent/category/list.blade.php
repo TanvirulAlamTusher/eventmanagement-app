@@ -4,7 +4,7 @@
         <div class="card px-5 py-5">
             <div class="row justify-content-between ">
                 <div class="align-items-center col">
-                    <h4>Events</h4>
+                    <h4>Event Category</h4>
                 </div>
                 <div class="align-items-center col">
                     <button data-bs-toggle="modal" data-bs-target="#create-modal" class="float-end btn m-0 btn-sm bg-gradient-primary">Create</button>

@@ -18,7 +18,7 @@ return new class extends Migration
            $table->date('date');
            $table->time('time');
            $table->string('location');
-           $table->integer('attendance')->nullable();
+           $table->integer('attendance')->nullable()->default(0);
 
            //foreign key
            $table->unsignedBigInteger('user_id');

@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
    Route::post('/get-event-by-id',[EventController::class,'EventById']);
    Route::post('/update-event',[EventController::class,'UpdateEvent'])->name('event.update');
    Route::post('/delete-event',[EventController::class,'DeleteEvent'])->name('event.delete');
+   
    //event category
    Route::post('/create-catagory', [EventCategotyController::class, 'CreateCategory']);
    Route::get('/catagory-list', [EventCategotyController::class, 'CategoryList']);
@@ -61,4 +62,6 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/logout',[UserController::class,'destroy'])->name('logout');
+//public route
 Route::get('/get-allevent',[AllEventController::class,'AllEvents']);
+Route::post('/add-attendance',[EventController::class,'incrementAttendance']);

@@ -35,6 +35,7 @@
     async function ShowAllEvents() {
         showLoader();
         let res = await axios.get('get-allevent');
+        hideLoader();
         res.data.forEach(item => {
             document.getElementById('eventList').innerHTML+=(
                 `
@@ -49,7 +50,7 @@
                                 </div>
                                 <div class="event_body text-center">
                                     <h3 class="title" id="event_title">${item['title']}</h3>
-                                <a href="" class="btn get_detail_btn">Interest</a>
+                                <button data-id=${item['id']}  class="btn rsvp_btn">Interest</button>
                                 </div>
                                 <div class="event_footer text-center">
                                     <p class="location" id="event_location">${item['location']}</p>
@@ -63,7 +64,14 @@
             )
 
         })
-      hideLoader();
+
+      $('.rsvp_btn').on('click', async function () {
+        let id = $(this).data('id');
+        showLoader();
+        let ress = await axios.post('/add-attendance',{id:id})
+        hideLoader();
+        alert("Thanks for your Interest!");
+      })
 
       
     }
